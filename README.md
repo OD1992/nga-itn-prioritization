@@ -1,4 +1,4 @@
-# Nigeria ITN Urban Microstratification
+# Nigeria ITN Urban Microstratification <img src="docs/TKI MAP_REVISED LOGO_MASTER 1.jpeg" height="40" align="left" alt="Logo"/>  
 
 A ward-level workflow for prioritizing insecticide-treated net (ITN) distribution
 in Nigeria, combining an **80% urban population rule** with **PfPR (malaria
