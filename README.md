@@ -86,4 +86,4 @@ header comment of each script for the exact output paths.
 ## Status
 
 Prepared as part of NGA ITN Urban Microstratification (HBHI 2026 post-hoc
-analysis); presented at ASTMH (see `docs/`).
+analysis); abstract submitted to ASTMH 2026 (see `docs/`).
