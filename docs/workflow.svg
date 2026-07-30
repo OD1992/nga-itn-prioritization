@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  NGA ITN Microstratification — workflow diagram
+  Editable in:
+    - PowerPoint (Insert → Picture → ungroup once or twice to access shapes)
+    - Inkscape / Illustrator / Affinity Designer
+    - Any text editor (this is plain XML)
+  Coordinates in pixels; 1000 x 600 viewBox.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" font-family="Calibri, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1C7293"/>
+    </marker>
+    <style>
+      .lane    { fill:#64748B; font-size:13px; font-weight:700; letter-spacing:2px; }
+      .input   { fill:#F5F7FA; stroke:#1C7293; stroke-width:1.8; }
+      .step    { fill:#065A82; stroke:#065A82; stroke-width:1.8; }
+      .step2   { fill:#1C7293; stroke:#1C7293; stroke-width:1.8; }
+      .out     { fill:#FFFFFF; stroke:#065A82; stroke-width:1.8; }
+      .final   { fill:#047857; stroke:#047857; stroke-width:1.8; }
+      .label   { font-size:16px; fill:#1E293B; }
+      .labelW  { font-size:18px; fill:#FFFFFF; font-weight:700; }
+      .arrow   { stroke:#1C7293; stroke-width:2.5; fill:none; marker-end:url(#arrow); }
+      .title   { font-size:24px; font-weight:700; fill:#21295C; font-family:Cambria, Georgia, serif; }
+      .eyebrow { font-size:12px; font-weight:700; fill:#1C7293; letter-spacing:4px; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="50" y="46" class="eyebrow">DIAGRAM</text>
+  <text x="50" y="80" class="title">End-to-end workflow — ITN microstratification</text>
+
+  <!-- Lane labels -->
+  <text x="80" y="155" text-anchor="end" class="lane">INPUTS</text>
+  <text x="80" y="245" text-anchor="end" class="lane">STEP 1</text>
+  <text x="80" y="320" text-anchor="end" class="lane">OUTPUT</text>
+  <text x="80" y="410" text-anchor="end" class="lane">STEP 2</text>
+  <text x="80" y="525" text-anchor="end" class="lane">STEP 3</text>
+
+  <!-- Row 1 — Inputs -->
+  <rect x="100" y="125" width="240" height="60" rx="8" ry="8" class="input"/>
+  <text x="220" y="153" text-anchor="middle" class="label">Ward shapefile</text>
+  <text x="220" y="173" text-anchor="middle" class="label" font-size="13" fill="#64748B">(GRID3 / NMEP)</text>
+
+  <rect x="370" y="125" width="220" height="60" rx="8" ry="8" class="input"/>
+  <text x="480" y="153" text-anchor="middle" class="label">WorldPop</text>
+  <text x="480" y="173" text-anchor="middle" class="label" font-size="13" fill="#64748B">population raster</text>
+
+  <rect x="620" y="125" width="240" height="60" rx="8" ry="8" class="input"/>
+  <text x="740" y="153" text-anchor="middle" class="label">GHS-SMOD</text>
+  <text x="740" y="173" text-anchor="middle" class="label" font-size="13" fill="#64748B">urban classification</text>
+
+  <!-- Arrows: inputs → Step 1 -->
+  <path d="M 220 188 C 220 210, 480 210, 480 222" class="arrow"/>
+  <path d="M 480 188 V 222"                          class="arrow"/>
+  <path d="M 740 188 C 740 210, 480 210, 480 222"   class="arrow"/>
+
+  <!-- Row 2 — Step 1 -->
+  <rect x="160" y="225" width="700" height="58" rx="10" ry="10" class="step"/>
+  <text x="510" y="261" text-anchor="middle" class="labelW">Step 1: Urban classification — 80% population rule</text>
+
+  <!-- Arrow -->
+  <path d="M 510 285 V 308" class="arrow"/>
+
+  <!-- Row 3 — Step 1 output -->
+  <rect x="220" y="310" width="580" height="50" rx="8" ry="8" class="out"/>
+  <text x="510" y="341" text-anchor="middle" class="label">Urban wards classified per state (gpkg + CSV)</text>
+
+  <!-- Side input: PfPR -->
+  <rect x="780" y="380" width="180" height="50" rx="8" ry="8" class="input"/>
+  <text x="870" y="411" text-anchor="middle" class="label">MAP PfPR raster</text>
+
+  <!-- Arrows merging into Step 2 -->
+  <path d="M 510 362 V 412" class="arrow"/>
+  <path d="M 780 405 C 700 410, 600 410, 600 412" class="arrow"/>
+
+  <!-- Row 4 — Step 2 -->
+  <rect x="160" y="412" width="700" height="58" rx="10" ry="10" class="step2"/>
+  <text x="510" y="448" text-anchor="middle" class="labelW">Step 2: Population-weighted PfPR ranking within state</text>
+
+  <!-- Arrow elbow from Step 2 → ITN priority list -->
+  <path d="M 510 472 V 485 H 220 V 498" class="arrow"/>
+
+  <!-- Row 5 — Step 3 branch: priority list → mapping → maps -->
+  <rect x="80"  y="500" width="280" height="50" rx="8" ry="8" class="out"/>
+  <text x="220" y="531" text-anchor="middle" class="label">ITN priority list per state</text>
+
+  <path d="M 360 525 H 388" class="arrow"/>
+
+  <rect x="390" y="500" width="220" height="50" rx="8" ry="8" class="step2"/>
+  <text x="500" y="531" text-anchor="middle" class="labelW">Step 3: Per-state mapping</text>
+
+  <path d="M 610 525 H 638" class="arrow"/>
+
+  <rect x="640" y="500" width="280" height="50" rx="8" ry="8" class="final"/>
+  <text x="780" y="531" text-anchor="middle" class="labelW">Per-state priority maps (PNG)</text>
+</svg>
